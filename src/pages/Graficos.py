@@ -9,8 +9,8 @@ st.set_page_config(
     page_title="Graficos"
 )
 
-notas = pd.read_sql("notas_alunos", conn)
-notas = notas.drop(columns="index")
+notas = conn.read(skiprows=[1])
+
 
 tab1, tab2, tab3 = st.tabs(["Turma 1", "Turma 2", "Turma 3"])
 
