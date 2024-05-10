@@ -2,11 +2,12 @@ import streamlit as st
 import pandas as pd
 from Main_Page import load_data
 import matplotlib.pyplot as plt
+from Main_Page import notas
 
 st.set_page_config(
     page_title="Resultados 1 bim"
 )
-notas = load_data()
+
 st.write ("# Turma 1 - medias 1 bim")
 
 lista_alunos = notas[["ARTE.T", 
