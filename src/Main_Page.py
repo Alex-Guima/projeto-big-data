@@ -6,8 +6,8 @@ st.set_page_config(
 )
 
 
+tabela_notas = st.file_uploader("Insira a tabela:", ".xlsx")
 def load_data():
-    tabela_notas = st.file_uploader("Insira a tabela:", ".xlsx")
     if tabela_notas is not None:
         notas = pd.read_excel(tabela_notas, skiprows=[1])
         notas = notas.round(1)
