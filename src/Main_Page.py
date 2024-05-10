@@ -7,8 +7,6 @@ st.set_page_config(
     page_title="Main Page",
 )
 
-
-
 st.write("# Bem-vindos as suas estatisticas")
 conn = create_engine(
     "postgresql+psycopg2://{}:{}@{}:{}/{}".format(st.secrets["username"], st.secrets["password"], st.secrets["host"], st.secrets["port"], st.secrets["database"])
