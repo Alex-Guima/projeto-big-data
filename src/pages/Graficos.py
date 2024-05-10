@@ -40,8 +40,8 @@ def selecionar_opcoes_media(turma):
         placeholder="Escolha suas materias",
         key="medias" + str(turma)
         )
-        for i in opcoes_selecionadas:   
-            yield i + ".M"
+        for materia in opcoes_selecionadas:   
+            yield materia + ".M"
 
 def selecionar_opcoes_prova(turma):
         opcoes_selecionadas = st.multiselect("Escolha as materias que deseja ver:",
@@ -50,8 +50,8 @@ def selecionar_opcoes_prova(turma):
         placeholder="Escolha suas materias",
         key="provas" + str(turma)
         )
-        for i in opcoes_selecionadas:   
-            yield i + ".P"
+        for materia in opcoes_selecionadas:   
+            yield materia + ".P"
 
 def selecionar_opcoes_teste(turma):
         opcoes_selecionadas = st.multiselect("Escolha as materias que deseja ver:",
@@ -60,8 +60,8 @@ def selecionar_opcoes_teste(turma):
         placeholder="Escolha suas materias",
         key="teste" + str(turma)
         )
-        for i in opcoes_selecionadas:   
-            yield i + ".T"
+        for materia in opcoes_selecionadas:   
+            yield materia + ".T"
 
 
 with tab1:
