@@ -5,7 +5,7 @@ st.set_page_config(
     page_title="Main Page",
 )
 
-@st.cache_resource
+
 def load_data():
     tabela_notas = st.file_uploader("Insira a tabela:", ".xlsx")
     if tabela_notas is not None:
