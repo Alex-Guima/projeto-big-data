@@ -8,8 +8,8 @@ st.set_page_config(
 
 conn = create_engine("postgresql+psycopg2://{}:{}@{}/{}".format(st.secrets["username"], st.secrets["password"], st.secrets["host"], st.secrets["database"]))
 
+uploaded_file = st.file_uploader("Insira um arquivo:", ".xlsx")
 def load_data():
-    uploaded_file = st.file_uploader("Insira um arquivo:", ".xlsx")
     if uploaded_file is not None:
         notas = pd.read_excel(uploaded_file, skiprows=[1])
         notas = notas.round(1)
