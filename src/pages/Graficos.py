@@ -112,3 +112,4 @@ with tab3:
     "---"
     st.write("## Grafico Testes por Materia")
     grafico_testes = st.line_chart(media_turma_3[selecionar_opcoes_teste(turma_3)])
+    "---"
