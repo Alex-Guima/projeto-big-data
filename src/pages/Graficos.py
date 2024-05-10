@@ -3,11 +3,13 @@ import pandas as pd
 import numpy as np
 import altair as alt
 import matplotlib.pyplot as plt
-from Main_Page import load_data, notas
+from Main_Page import load_data
 
 st.set_page_config(
     page_title="Graficos"
 )
+
+notas = load_data()
 
 tab1, tab2, tab3 = st.tabs(["Turma 1", "Turma 2", "Turma 3"])
 
