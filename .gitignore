@@ -1,0 +1,4 @@
+data/
+.venv/
+src/__pycache__
+src/memos.py
