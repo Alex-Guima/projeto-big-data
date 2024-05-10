@@ -3,3 +3,5 @@ pandas
 matplotlib
 openpyxl
 pydeck
+psycopg2-binary
+sqlalchemy
