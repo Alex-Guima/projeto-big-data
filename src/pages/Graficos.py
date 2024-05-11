@@ -38,26 +38,26 @@ tab1, tab2, tab3 = st.tabs(["Turma 1", "Turma 2", "Turma 3"])
 with tab1:
 
     if tipos_selecionados != [] and opcoes_selecionadas != []:
-        st.write(turma_1.get_dataframe(tipos_selecionados, opcoes_selecionadas))
+        st.write(turma_1.get_notas(tipos_selecionados, opcoes_selecionadas))
         "## Grafico Geral"
         "---"
-        st.line_chart(turma_1.get_dataframe(tipos_selecionados, opcoes_selecionadas))
+        st.line_chart(turma_1.get_notas(tipos_selecionados, opcoes_selecionadas))
     else:
         st.warning("Por favor selecione pelo menos uma materia e um dos tipos de avaliacao")
 with tab2:
 
     if tipos_selecionados != [] and opcoes_selecionadas != []:
-        st.write(turma_2.get_dataframe(tipos_selecionados, opcoes_selecionadas))
+        st.write(turma_2.get_notas(tipos_selecionados, opcoes_selecionadas))
         "## Grafico Geral"
         "---"
-        st.line_chart(turma_2.get_dataframe(tipos_selecionados, opcoes_selecionadas))
+        st.line_chart(turma_2.get_notas(tipos_selecionados, opcoes_selecionadas))
     else:
         st.warning("Por favor selecione pelo menos uma materia e um dos tipos de avaliacao")
 with tab3:
     if tipos_selecionados != [] and opcoes_selecionadas != []:
-        st.write(turma_3.get_dataframe(tipos_selecionados, opcoes_selecionadas))
+        st.write(turma_3.get_notas(tipos_selecionados, opcoes_selecionadas))
         "## Grafico Geral"
         "---"
-        st.line_chart(turma_3.get_dataframe(tipos_selecionados, opcoes_selecionadas))
+        st.line_chart(turma_3.get_notas(tipos_selecionados, opcoes_selecionadas))
     else:
         st.warning("Por favor selecione pelo menos uma materia e um dos tipos de avaliacao")
