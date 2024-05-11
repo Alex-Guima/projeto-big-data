@@ -41,6 +41,8 @@ with tab1:
         "## Grafico Geral"
         "---"
         st.line_chart(turma_1.get_dataframe(tipos_selecionados, opcoes_selecionadas).drop(columns="NOME"))
+    elif tipos_selecionados.__len__ == 1 and opcoes_selecionadas.__len__ == 1:
+        st.warning("Por favor selecione pelo mais materias ou mais tipos de avaliacao")
     else:
         st.warning("Por favor selecione pelo menos uma materia e um dos tipos de avaliacao")
 with tab2:
@@ -49,6 +51,8 @@ with tab2:
         "## Grafico Geral"
         "---"
         st.line_chart(turma_2.get_dataframe(tipos_selecionados, opcoes_selecionadas).drop(columns="NOME"))
+    elif tipos_selecionados.__len__ == 1 and opcoes_selecionadas.__len__ == 1:
+        st.warning("Por favor selecione pelo mais materias ou mais tipos de avaliacao")
     else:
         st.warning("Por favor selecione pelo menos uma materia e um dos tipos de avaliacao")
 with tab3:
@@ -56,5 +60,7 @@ with tab3:
         "## Grafico Geral"
         "---"
         st.line_chart(turma_3.get_dataframe(tipos_selecionados, opcoes_selecionadas).drop(columns="NOME"))
+    elif tipos_selecionados.__len__ == 1 and opcoes_selecionadas.__len__ == 1:
+        st.warning("Por favor selecione pelo mais materias ou mais tipos de avaliacao")
     else:
         st.warning("Por favor selecione pelo menos uma materia e um dos tipos de avaliacao")
