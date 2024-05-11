@@ -43,7 +43,7 @@ class Turma:
             df = pd.concat([df, nota], axis=1)
         df.insert(0,"NOME", self.lista_alunos)
         df.set_index("NOME")
-        return df.transpose()
+        return df
         
         
 
