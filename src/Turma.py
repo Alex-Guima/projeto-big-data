@@ -41,7 +41,9 @@ class Turma:
         notas = self.get_notas(tipo, opcoes)
         for nota in notas:
             df = pd.concat([df, nota], axis=1)
-        return df.transpose()
+        df.insert(0,"NOME", self.lista_alunos)
+        df.set_index("NOME")
+        return df
         
         
 
