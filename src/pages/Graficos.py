@@ -40,7 +40,7 @@ with tab1:
     if tipos_selecionados != [] and opcoes_selecionadas != []:
         "## Grafico Geral"
         "---"
-        st.line_chart(turma_1.get_dataframe(tipos_selecionados, opcoes_selecionadas))
+        st.line_chart(turma_1.get_dataframe(tipos_selecionados, opcoes_selecionadas).drop(columns="NOME"))
     else:
         st.warning("Por favor selecione pelo menos uma materia e um dos tipos de avaliacao")
 with tab2:
@@ -48,13 +48,13 @@ with tab2:
     if tipos_selecionados != [] and opcoes_selecionadas != []:
         "## Grafico Geral"
         "---"
-        st.line_chart(turma_2.get_dataframe(tipos_selecionados, opcoes_selecionadas))
+        st.line_chart(turma_2.get_dataframe(tipos_selecionados, opcoes_selecionadas).drop(columns="NOME"))
     else:
         st.warning("Por favor selecione pelo menos uma materia e um dos tipos de avaliacao")
 with tab3:
     if tipos_selecionados != [] and opcoes_selecionadas != []:
         "## Grafico Geral"
         "---"
-        st.line_chart(turma_3.get_dataframe(tipos_selecionados, opcoes_selecionadas))
+        st.line_chart(turma_3.get_dataframe(tipos_selecionados, opcoes_selecionadas).drop(columns="NOME"))
     else:
         st.warning("Por favor selecione pelo menos uma materia e um dos tipos de avaliacao")
