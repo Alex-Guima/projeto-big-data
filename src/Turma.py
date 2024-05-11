@@ -20,6 +20,7 @@ class Turma:
     def get_notas(self, tipos, opcoes):
         notas_turma = notas[notas["NOME"].isin(self.lista_alunos)]
         notas_turma = notas_turma.round(2)
+        notas_turma = notas_turma.transpose()
         for opcao in opcoes:
             for tipo in tipos:
                 yield notas_turma[opcao + self.check_type(tipo)]
