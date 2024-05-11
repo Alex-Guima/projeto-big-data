@@ -7,7 +7,8 @@ st.set_page_config(
     page_title="Resultados 1 bim"
 )
 
-notas = pd.read_sql("notas_alunos", conn)
+notas = conn.read(skiprows=[1])
+
 st.write ("# Turma 1 - medias 1 bim")
 
 lista_alunos = notas[["ARTE.T", 
@@ -37,7 +38,7 @@ mylabels = ["ARTE.T",
 ]
 
 
-turma_1 = lista_alunos.iloc[0:12]
+turma_1 = lista_alunos.iloc[:13]
 turma_1
 
 
