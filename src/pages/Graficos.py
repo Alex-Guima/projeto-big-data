@@ -4,113 +4,60 @@ import numpy as np
 import altair as alt
 import matplotlib.pyplot as plt
 from Main_Page import conn
+from Turma import Turma
 
 st.set_page_config(
     page_title="Graficos"
 )
+"# Graficos"
 
 notas = conn.read(skiprows=[1])
 
+turma_1 = Turma()
+turma_2 = Turma()
+turma_3 = Turma()
+
+turma_1.add_alunos(notas["NOME"][:13])
+turma_2.add_alunos(notas["NOME"][13:35])
+turma_3.add_alunos(notas["NOME"][35:52]) 
+
+opcoes_selecionadas = st.multiselect("Escolha as materias que deseja ver:",
+        Turma.materias,
+        ['ARTE'],
+        placeholder="Escolha suas materias",
+        )
+
+tipos_selecionados = st.multiselect("Escolha a modalidade de avaliacao:",
+        Turma.tipos,
+        ['Media', 'Prova', 'Teste'],
+        placeholder="Escolha sua modalidade de avaliacao",
+        )
 
 tab1, tab2, tab3 = st.tabs(["Turma 1", "Turma 2", "Turma 3"])
 
-lista_alunos = notas['NOME'].unique()
-
-turma_1 = lista_alunos[:13]
-
-turma_2 = lista_alunos[13:35]
-
-turma_3 = lista_alunos[35:52]
-
-materias = ["ARTE", "FILOSOFIA", "GEOGRAFIA", "HISTÓRIA", 
-"LÍNGUA INGLESA", "LÍNGUA PORTUGUESA", "MATEMÁTICA", "QUÍMICA",
-"REDAÇÃO", "BIOLOGIA", "FÍSICA" ]
-
-notas_turma_1 = notas[notas['NOME'].isin(turma_1)]
-notas_turma_2 = notas[notas['NOME'].isin(turma_2)]
-notas_turma_3 = notas[notas['NOME'].isin(turma_3)]
-
-media_turma_1 = notas_turma_1.drop(columns='NOME').round(2)
-media_turma_2 = notas_turma_2.drop(columns='NOME').round(2)
-media_turma_3 = notas_turma_3.drop(columns='NOME').round(2)
-
-def selecionar_opcoes_media(turma):
-        opcoes_selecionadas = st.multiselect("Escolha as materias que deseja ver:",
-        materias,
-        ["ARTE", "BIOLOGIA"],
-        placeholder="Escolha suas materias",
-        key="medias" + str(turma)
-        )
-        for materia in opcoes_selecionadas:   
-            yield materia + ".M"
-
-def selecionar_opcoes_prova(turma):
-        opcoes_selecionadas = st.multiselect("Escolha as materias que deseja ver:",
-        materias,
-        ["ARTE", "BIOLOGIA"],
-        placeholder="Escolha suas materias",
-        key="provas" + str(turma)
-        )
-        for materia in opcoes_selecionadas:   
-            yield materia + ".P"
-
-def selecionar_opcoes_teste(turma):
-        opcoes_selecionadas = st.multiselect("Escolha as materias que deseja ver:",
-        materias,
-        ["ARTE", "BIOLOGIA"],
-        placeholder="Escolha suas materias",
-        key="teste" + str(turma)
-        )
-        for materia in opcoes_selecionadas:   
-            yield materia + ".T"
-
-
 with tab1:
-    st.dataframe(media_turma_1, use_container_width=True)
 
-    "---"
-    st.write(" ## Grafico Medias por Materia")
-    
-    
-    grafico_medias = st.line_chart(media_turma_1[selecionar_opcoes_media(turma_1)])
-    "---"
-    st.write(" ## Grafico Provas por Materia")
-    grafico_provas = st.line_chart(media_turma_1[selecionar_opcoes_prova(turma_1)])
-
-    "---"
-    st.write("## Grafico Testes por Materia")
-    grafico_testes = st.line_chart(media_turma_1[selecionar_opcoes_teste(turma_1)])
-
+    if tipos_selecionados != [] and opcoes_selecionadas != []:
+        st.write(turma_1.get_dataframe(tipos_selecionados, opcoes_selecionadas))
+        "## Grafico Geral"
+        "---"
+        st.line_chart(turma_1.get_dataframe(tipos_selecionados, opcoes_selecionadas))
+    else:
+        st.warning("Por favor selecione pelo menos uma materia e um dos tipos de avaliacao")
 with tab2:
-    st.dataframe(media_turma_2, use_container_width=True)
 
-    "---"
-    st.write(" ## Grafico Medias por Materia")
-    
-    
-    grafico_medias = st.line_chart(media_turma_2[selecionar_opcoes_media(turma_2)])
-    "---"
-    st.write(" ## Grafico Provas por Materia")
-    grafico_provas = st.line_chart(media_turma_2[selecionar_opcoes_prova(turma_2)])
-
-    "---"
-    st.write("## Grafico Testes por Materia")
-    grafico_testes = st.line_chart(media_turma_2[selecionar_opcoes_teste(turma_2)])
-
-
+    if tipos_selecionados != [] and opcoes_selecionadas != []:
+        st.write(turma_2.get_dataframe(tipos_selecionados, opcoes_selecionadas))
+        "## Grafico Geral"
+        "---"
+        st.line_chart(turma_2.get_dataframe(tipos_selecionados, opcoes_selecionadas))
+    else:
+        st.warning("Por favor selecione pelo menos uma materia e um dos tipos de avaliacao")
 with tab3:
-    st.dataframe(media_turma_3, use_container_width=True)
-
-    "---"
-    st.write(" ## Grafico Medias por Materia")
-    
-    
-    grafico_medias = st.line_chart(media_turma_3[selecionar_opcoes_media(turma_3)])
-    "---"
-    st.write(" ## Grafico Provas por Materia")
-    grafico_provas = st.line_chart(media_turma_3[selecionar_opcoes_prova(turma_3)])
-
-    "---"
-    st.write("## Grafico Testes por Materia")
-    grafico_testes = st.line_chart(media_turma_3[selecionar_opcoes_teste(turma_3)])
-    "---"
+    if tipos_selecionados != [] and opcoes_selecionadas != []:
+        st.write(turma_3.get_dataframe(tipos_selecionados, opcoes_selecionadas))
+        "## Grafico Geral"
+        "---"
+        st.line_chart(turma_3.get_dataframe(tipos_selecionados, opcoes_selecionadas))
+    else:
+        st.warning("Por favor selecione pelo menos uma materia e um dos tipos de avaliacao")
