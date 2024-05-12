@@ -1,7 +1,6 @@
 import streamlit as st
 import numpy as np
 import pandas as pd
-from Main_Page import notas
 
 class Turma:
     materias = ["ARTE", "FILOSOFIA", "GEOGRAFIA", "HISTÓRIA", 
@@ -12,15 +11,17 @@ class Turma:
 
     turma_id = 0
 
+    notas = st.session_state['notas']
+
     def set_turma_id(self, turma_id):
         self.turma_id = turma_id
     
     def get_turma_id(self):
         return self.turma_id
 
-
     def get_notas(self, tipos, opcoes):
         turma = self.get_turma()
+        notas = self.notas
         notas_turma = notas[notas["NOME"].isin(turma)]
         notas_turma = notas_turma.round(2)
         for opcao in opcoes:
@@ -37,6 +38,7 @@ class Turma:
             return ".T"
 
     def get_dataframe(self, tipo, opcoes):
+        notas = self.notas
         turma = self.get_turma()
         df = pd.DataFrame()
         notas = self.get_notas(tipo, opcoes)
@@ -47,6 +49,7 @@ class Turma:
         return df
         
     def get_turma(self):
+        notas = self.notas
         turma_id = self.get_turma_id()
         match turma_id:
             case 0:

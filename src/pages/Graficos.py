@@ -1,5 +1,4 @@
 import streamlit as st
-from Main_Page import conn
 from Turma import Turma
 from Tabs import Tabs
 
@@ -7,8 +6,6 @@ st.set_page_config(
     page_title="Graficos"
 )
 "# Graficos"
-
-notas = conn.read(skiprows=[1])
 
 tabs = Tabs()
 
