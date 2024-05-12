@@ -1,13 +1,12 @@
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
-from Main_Page import conn
 
 st.set_page_config(
     page_title="Resultados 1 bim"
 )
 
-notas = conn.read(skiprows=[1])
+notas = st.session_state['notas']
 
 st.write ("# Turma 1 - medias 1 bim")
 
