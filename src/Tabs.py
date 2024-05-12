@@ -9,7 +9,3 @@ class Tabs:
             
         tab_list = st.tabs(tabs)
         return tab_list
-
-    def create_tabs(self, tab_list):
-        for i in range(len(tab_list)):
-            yield tab_list[i]
