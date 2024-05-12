@@ -15,7 +15,8 @@ uploaded_file = st.file_uploader("Selecione seu Arquivo", [".xlsx", ".xls"])
 if 'uploaded_file' not in st.session_state:
     st.session_state['uploaded_file'] = None
 
-st.session_state['uploaded_file'] = uploaded_file
+if uploaded_file != None:
+    st.session_state['uploaded_file'] = uploaded_file
 
 session_state = utilities.initialize_session_state(st.session_state['uploaded_file'])
 
