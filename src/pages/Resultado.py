@@ -1,6 +1,7 @@
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
+from Turma import Turma
 
 st.set_page_config(
     page_title="Resultados 1 bim"
@@ -8,42 +9,30 @@ st.set_page_config(
 
 notas = st.session_state['notas']
 
+turma = Turma()
+turma.set_turma_id(0)
+
+opcoes_selecionadas = st.multiselect("Escolha as materias que deseja ver:",
+        Turma.materias,
+        ['ARTE'],
+        placeholder="Escolha suas materias",
+        )
+
+
 st.write ("# Turma 1 - medias 1 bim")
 
-lista_alunos = notas[["ARTE.T", 
-"FILOSOFIA.T",
-'GEOGRAFIA.T',
-'HISTÓRIA.T',
-'LÍNGUA INGLESA.T',
-'LÍNGUA PORTUGUESA.T',
-'MATEMÁTICA.T',
-'QUÍMICA.T',
-'REDAÇÃO.T',
-'BIOLOGIA.T',
-'FÍSICA.T',
-]]
+nomes_materias = turma.get_nome_materias(turma.get_dataframe_by_materia(opcoes_selecionadas), opcoes_selecionadas)
 
-mylabels = ["ARTE.T", 
-"FILOSOFIA.T",
-'GEOGRAFIA.T',
-'HISTÓRIA.T',
-'LÍNGUA INGLESA.T',
-'LÍNGUA PORTUGUESA.T',
-'MATEMÁTICA.T',
-'QUÍMICA.T',
-'REDAÇÃO.T',
-'BIOLOGIA.T',
-'FÍSICA.T'
-]
+dataframe = turma.get_dataframe_by_materia(opcoes_selecionadas)
+comparison_list = []
 
+for nome in nomes_materias:
+    comparison_list.append(dataframe[nome] < 6)
+    
+contagem = sum(comparison_list)
 
-turma_1 = lista_alunos.iloc[:13]
-turma_1
-
-
-
+contagem_falsos = len(comparison_list) - contagem
 
 fig, ax = plt.subplots()
-ax.pie(turma_1["ARTE.T"])
-
+ax.pie(contagem_falsos)
 st.pyplot(fig)

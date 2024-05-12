@@ -28,6 +28,14 @@ class Turma:
             for tipo in tipos:
                 yield notas_turma[opcao + self.check_type(tipo)]
 
+    def get_notas_by_materias(self, materias):
+        turma = self.get_turma()
+        notas = self.notas
+        notas_turma = notas[notas["NOME"].isin(turma)]
+        notas_turma = notas_turma.round(2)
+        for materia in materias:
+            yield notas_turma[materia + ".M"]
+
     def check_type(self, tipo):
         tipo = tipo.lower()
         if tipo == "media":
@@ -42,6 +50,17 @@ class Turma:
         turma = self.get_turma()
         df = pd.DataFrame()
         notas = self.get_notas(tipo, opcoes)
+        for nota in notas:
+            df = pd.concat([df, nota], axis=1)
+        df.insert(0,"NOME", turma)
+        df.set_index("NOME")
+        return df
+
+    def get_dataframe_by_materia(self, materias):
+        notas = self.notas
+        turma = self.get_turma()
+        df = pd.DataFrame()
+        notas = self.get_notas_by_materias(materias)
         for nota in notas:
             df = pd.concat([df, nota], axis=1)
         df.insert(0,"NOME", turma)
@@ -97,11 +116,10 @@ class Turma:
             case 21:
                 return notas["NOME"][674:708]
 
-
-
-        
-
-
-    
-
-    
+    def get_nome_materias(self, df, materias):
+        nomes_materias = []
+        for col in df:
+            nomes_materias.append(col)
+        nomes_materias.remove("NOME")
+        return nomes_materias
+            
