@@ -9,8 +9,6 @@ st.set_page_config(
 
 tabs = Tabs()
 
-notas = st.session_state['notas']
-
 opcoes_selecionadas = st.multiselect("Escolha as materias que deseja ver:",
         Turma.materias,
         ['ARTE'],

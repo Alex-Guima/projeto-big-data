@@ -24,5 +24,3 @@ st.dataframe(session_state, hide_index=True)
 
 st.sidebar.info("Selecione o que deseja ver")
 
-
-
