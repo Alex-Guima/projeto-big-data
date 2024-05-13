@@ -1,6 +1,7 @@
 import streamlit as st
 import numpy as np
 import pandas as pd
+from Main_Page import session_state
 
 class Turma:
     materias = ["ARTE", "FILOSOFIA", "GEOGRAFIA", "HISTÓRIA", 
@@ -11,7 +12,7 @@ class Turma:
 
     turma_id = 0
 
-    notas = st.session_state['notas']
+    notas = session_state
 
     def set_turma_id(self, turma_id):
         self.turma_id = turma_id
