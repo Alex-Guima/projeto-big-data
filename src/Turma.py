@@ -14,7 +14,7 @@ class Turma:
 
     utilities = Utils()
 
-    session_state = utilities.initialize_session_state(st.session_state['uploaded_file'])
+    notas = utilities.initialize_session_state(st.session_state['uploaded_file'])
 
     def set_turma_id(self, turma_id):
         self.turma_id = turma_id
