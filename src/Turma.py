@@ -1,7 +1,7 @@
 import streamlit as st
 import numpy as np
 import pandas as pd
-import Main_Page
+from Utils import Utils
 
 class Turma:
     materias = ["ARTE", "FILOSOFIA", "GEOGRAFIA", "HISTÓRIA", 
@@ -12,7 +12,9 @@ class Turma:
 
     turma_id = 0
 
-    notas = Main_Page.session_state
+    utilities = Utils()
+
+    session_state = utilities.initialize_session_state(st.session_state['uploaded_file'])
 
     def set_turma_id(self, turma_id):
         self.turma_id = turma_id
