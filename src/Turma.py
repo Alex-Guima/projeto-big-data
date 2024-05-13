@@ -12,7 +12,7 @@ class Turma:
 
     turma_id = 0
 
-    notas = session_state
+    notas = Main_Page.session_state
 
     def set_turma_id(self, turma_id):
         self.turma_id = turma_id
