@@ -38,4 +38,4 @@ for i in range(len(tab_list)):
             "## Grafico Geral"
             "---"
             st.line_chart(turma.get_dataframe(tipos_selecionados, opcoes_selecionadas), x="NOME")
-        turma.notas
+        st.write(turma.notas)
