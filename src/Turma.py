@@ -1,7 +1,7 @@
 import streamlit as st
 import numpy as np
 import pandas as pd
-from Main_Page import session_state
+import Main_Page
 
 class Turma:
     materias = ["ARTE", "FILOSOFIA", "GEOGRAFIA", "HISTÓRIA", 
