@@ -1,2 +1,2 @@
 class Utils:
-    
+    utilties = "Teste"
