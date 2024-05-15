@@ -1,7 +1,6 @@
 import streamlit as st
 import numpy as np
 import pandas as pd
-from Utils import Utils
 
 class Turma:
     materias = ["ARTE", "FILOSOFIA", "GEOGRAFIA", "HISTÓRIA", 
@@ -11,8 +10,6 @@ class Turma:
     tipos = ["Media", "Prova", "Teste"]
 
     turma_id = 0
-
-    utilities = Utils()
 
     if 'notas' not in st.session_state:
         st.session_state['notas'] = None
@@ -134,4 +131,8 @@ class Turma:
             nomes_materias.append(col)
         nomes_materias.remove("NOME")
         return nomes_materias
-        
+
+    def filter_nota_by_aluno(self, nome, dataframe): 
+        nome = int(nome)
+        notas_aluno_especifico = dataframe.iloc[nome]
+        return notas_aluno_especifico

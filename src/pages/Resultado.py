@@ -19,25 +19,15 @@ opcoes_selecionadas = st.multiselect("Escolha as materias que deseja ver:",
         )
 
 
-st.write ("# Turma 1 - medias 1 bim")
+st.write ("# Media - Primeiro Bimestre")
 
-tab_list = tabs.create_tab_list()
+nome = st.text_input("Insira o nome do Aluno (de acordo com a tabela)")
 
-
-for i in range(len(tab_list)):
-    with tab_list[i]:
-        turma = Turma()
-        turma.set_turma_id(i)
-        dataframe = turma.get_dataframe_by_materia(opcoes_selecionadas)
-        for opcao in opcoes_selecionadas:
-            "# Grafico " + opcao
-            opcao_extensao = opcao + ".M"
-            fig = px.scatter(turma.get_dataframe_by_materia(opcoes_selecionadas),
-            x="NOME",
-            y=dataframe[opcao_extensao],
-            size=dataframe[opcao_extensao],
-            color=dataframe[opcao_extensao],
-            hover_name="NOME"
-            )
-            st.plotly_chart(fig)
-
+if nome:
+    turma = Turma()
+    dataframe = turma.get_dataframe_by_materia(opcoes_selecionadas)
+    notas_aluno_especifico = turma.filter_nota_by_aluno(nome, dataframe)
+    notas_aluno_especifico
+else:
+    st.warning("Por favor insira um nome")
+        

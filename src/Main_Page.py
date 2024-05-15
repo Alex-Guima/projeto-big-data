@@ -1,10 +1,7 @@
 import streamlit as st
 import pandas as pd
 from streamlit_gsheets import GSheetsConnection
-from Utils import Utils
 from Turma import Turma
-
-utilities = Utils()
 
 conn = st.connection("gsheets", type=GSheetsConnection)
 
