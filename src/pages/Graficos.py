@@ -36,15 +36,4 @@ for i in range(len(tab_list)):
         elif len(tipos_selecionados) == 1 and len(opcoes_selecionadas) == 1:
             st.warning("Por favor selecione mais materias ou mais tipos de avaliacao") 
         else:
-            for opcao in opcoes_selecionadas:
-                for tipo in tipos_selecionados:
-                    "# Grafico " + tipo + " "  + opcao 
-                    opcao_extensao = opcao + turma.check_type(tipo)
-                    fig = px.scatter(dataframe,
-                    x="NOME",
-                    y=dataframe[opcao_extensao],
-                    size=dataframe[opcao_extensao],
-                    color=dataframe[opcao_extensao],
-                    hover_name="NOME"
-                    )
-                    st.plotly_chart(fig)
+            st.line_chart(dataframe, x="NOME")
