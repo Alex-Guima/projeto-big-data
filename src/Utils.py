@@ -4,7 +4,6 @@ from streamlit_gsheets import GSheetsConnection
 
 
 class Utils:
-    conn = st.connection("gsheets", type=GSheetsConnection)
 
     def initialize_session_state(self, uploaded_file):
         if 'notas' not in st.session_state:
