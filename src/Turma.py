@@ -14,7 +14,7 @@ class Turma:
 
     utilities = Utils()
 
-    notas = 0
+    notas = st.session_state['notas']
 
     def set_turma_id(self, turma_id):
         self.turma_id = turma_id
