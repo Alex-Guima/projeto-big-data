@@ -14,7 +14,16 @@ class Turma:
 
     utilities = Utils()
 
+    if 'notas' not in st.session_state:
+        st.session_state['notas'] = None
+
     notas = st.session_state['notas']
+
+    def filter_materias(self, opcoes_selecionadas):
+        if opcoes_selecionadas in self.materias:
+            return True
+        else:
+            return False
 
     def set_turma_id(self, turma_id):
         self.turma_id = turma_id
@@ -125,4 +134,4 @@ class Turma:
             nomes_materias.append(col)
         nomes_materias.remove("NOME")
         return nomes_materias
-            
+        
