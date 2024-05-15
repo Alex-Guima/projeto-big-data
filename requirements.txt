@@ -4,3 +4,4 @@ matplotlib
 openpyxl
 pydeck
 st-gsheets-connection
+plotly

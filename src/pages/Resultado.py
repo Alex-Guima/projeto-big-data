@@ -2,15 +2,15 @@ import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 from Turma import Turma
+from Tabs import Tabs
+import pyplot.express as px
 
 st.set_page_config(
     page_title="Resultados 1 bim"
 )
 
 notas = st.session_state['notas']
-
-turma = Turma()
-turma.set_turma_id(0)
+tabs = Tabs()
 
 opcoes_selecionadas = st.multiselect("Escolha as materias que deseja ver:",
         Turma.materias,
@@ -21,18 +21,27 @@ opcoes_selecionadas = st.multiselect("Escolha as materias que deseja ver:",
 
 st.write ("# Turma 1 - medias 1 bim")
 
+tab_list = tabs.create_tab_list()
+
+for i in range(len(tab_list)):
+    with tab_list[i]:
+        turma = Turma()
+        turma.set_turma_id(i)
+        
+        fig= px.scatter(
+            df.query(turma.get_dataframe_by_materia(opcoes_selecionadas)),
+            size=turma.get_notas_by_materias(opcoes_selecionadas)
+        ) 
+
+        st.
+
 nomes_materias = turma.get_nome_materias(turma.get_dataframe_by_materia(opcoes_selecionadas), opcoes_selecionadas)
 
 dataframe = turma.get_dataframe_by_materia(opcoes_selecionadas)
-comparison_list = []
 
-for nome in nomes_materias:
-    comparison_list.append(dataframe[nome] < 6)
-    
-contagem = sum(comparison_list)
+fig = px.scatter(
+    dataframe.query(nomes_materias < 6),
+    x=nomes_materias,
+    y="Nota"
 
-contagem_falsos = len(comparison_list) - contagem
-
-fig, ax = plt.subplots()
-ax.pie(contagem_falsos)
-st.pyplot(fig)
+)
