@@ -9,6 +9,11 @@ class Turma:
 
     tipos = ["Media", "Prova", "Teste"]
 
+    turma_ids = []
+    
+    for i in range(22):
+        turma_ids.append(i + 1)
+
     turma_id = 0
 
     if 'notas' not in st.session_state:
@@ -23,7 +28,12 @@ class Turma:
             return False
 
     def set_turma_id(self, turma_id):
-        self.turma_id = turma_id
+        if type(turma_id) == list:
+            self.turma_id = []
+            for item in turma_id:
+                self.turma_id.append(item)
+        else:
+            self.turma_id = turma_id
     
     def get_turma_id(self):
         return self.turma_id
@@ -37,13 +47,12 @@ class Turma:
             for tipo in tipos:
                 yield notas_turma[opcao + self.check_type(tipo)]
 
-    def get_notas_by_materias(self, materias):
+    def get_notas_by_materia(self, materia):
         turma = self.get_turma()
         notas = self.notas
         notas_turma = notas[notas["NOME"].isin(turma)]
         notas_turma = notas_turma.round(2)
-        for materia in materias:
-            yield notas_turma[materia + ".M"]
+        yield notas_turma[materia + ".M"]
 
     def check_type(self, tipo):
         tipo = tipo.lower()
@@ -65,11 +74,11 @@ class Turma:
         df.set_index("NOME")
         return df
 
-    def get_dataframe_by_materia(self, materias):
+    def get_dataframe_by_materia(self, materia):
         notas = self.notas
         turma = self.get_turma()
         df = pd.DataFrame()
-        notas = self.get_notas_by_materias(materias)
+        notas = self.get_notas_by_materia(materia)
         for nota in notas:
             df = pd.concat([df, nota], axis=1)
         df.insert(0,"NOME", turma)
@@ -79,6 +88,9 @@ class Turma:
     def get_turma(self):
         notas = self.notas
         turma_id = self.get_turma_id()
+        if type(turma_id) == list:
+            for item in turma_id:
+                turma_id = item
         match turma_id:
             case 0:
                 return notas["NOME"][:13]

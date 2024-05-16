@@ -8,25 +8,45 @@ import plotly.express as px
 st.set_page_config(
     page_title="Resultados 1 bim"
 )
+st.write ("# Media - Primeiro Bimestre")
 
 notas = st.session_state['notas']
 tabs = Tabs()
-
-opcoes_selecionadas = st.multiselect("Escolha as materias que deseja ver:",
-        Turma.materias,
-        ['ARTE'],
-        placeholder="Escolha suas materias",
-        )
-
-
-st.write ("# Media - Primeiro Bimestre")
-
 turma = Turma()
 
-dataframe = turma.get_dataframe_by_materia(opcoes_selecionadas)
-dataframe = dataframe.drop(columns="NOME")
-for opcao in opcoes_selecionadas:
-    opcao_extensao = opcao + ".M"
+if not 'turmas' in st.session_state:
+    st.session_state['turmas'] = []
+
+
+if not 'opcao' in st.session_state:
+    st.session_state['opcao'] = ""
+
+if not 'fig' in st.session_state:
+    st.session_state['fig'] = []
+
+opcao_selecionada = st.selectbox("Materias",
+    Turma.materias,
+    placeholder="Materia"
+)
+
+def turmas_callback():
+    st.session_state['turmas'] = turmas_selecionadas
+    
+
+turmas_selecionadas = st.multiselect("Escolha as turmas que deseja ver:",
+    Turma.turma_ids,
+    1,
+    placeholder="Numero da Turma",
+    on_change=turmas_callback
+)
+
+
+
+def create_plotly_graph(opcao_selecionada, turmas_selecionadas):
+    dataframe = turma.get_dataframe_by_materia(opcao_selecionada)
+    dataframe = dataframe.drop(columns="NOME")
+    turma.set_turma_id(turmas_selecionadas)
+    opcao_extensao = opcao_selecionada + ".M"
     abaixo_ou_acima_dataframe = pd.DataFrame()
     acima = dataframe[dataframe[opcao_extensao] > 6].count()
     abaixo = dataframe[dataframe[opcao_extensao] < 6].count()
@@ -38,6 +58,11 @@ for opcao in opcoes_selecionadas:
     names=["Acima", "Abaixo"],
     color_discrete_sequence=px.colors.sequential.Bluered,
     hole=.98,
-    labels=['Acima', 'Abaixo']
+    labels=['Acima', 'Abaixo'],
     )
-    st.plotly_chart(fig)
+
+    return fig
+
+fig = create_plotly_graph(opcao_selecionada, st.session_state['turmas'])
+fig2 = create_plotly_graph(opcao_selecionada, st.session_state['turmas'])
+st.plotly_chart(fig2)
